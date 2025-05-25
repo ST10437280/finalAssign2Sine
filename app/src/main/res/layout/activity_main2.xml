@@ -1,0 +1,90 @@
+package vcmsa.ci.sineassign2
+
+import android.content.Intent
+import android.os.Bundle
+import android.widget.Button
+import android.widget.TextView
+import android.activity.enableEdgeToEdge
+import android.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import andriodx,core.view.WindowInsectsCompat
+
+class MainActivity2: AppCompatActivity() {
+    //Create an array of history questions
+    val questions = arrayOf(
+    "South Africa became a democratic country in 1994.",
+    "Albert Einstein invented the telephone.",
+    "The pyramids of Egypt were built as royal tombs.",
+    "The first human landed on the moon in 1959.",
+    "The Great Fire of London happened in the 1600s."
+    )
+    // Create a parallel array of answers (True or False) for the questions
+    val answers = arrayOf("True","False","True","False","True",)
+
+    // This will track which question it is
+    var currentIndex = 0
+
+    // Track user's score
+    var score = 0
+
+    overide fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        // Set layout for quiz screen
+        setContentView(R.layout.activity_main2)
+
+    //Find all views by their IDs
+    val questionText = findViewById<TextView>(R.id.questionText)
+    val trueButton = findViewById<Button>(R.id.TrueButton2)
+    val falseButton = findViewById<Button>(R.id.FalseButton3)
+    val nextButton = findViewById<Button>(R.id.NextButton)
+    val feedbackText = findViewById<TextView>(R.id.feedbackText)
+
+     //Display first question
+      questionText.text = questions[currentIndex]
+
+     // What will happen when user clicks "True"
+     trueButton.setOnClickListener {
+        if (answer[currentIndex] == "True") {
+          //Correct answer
+           feedbackText.text = "Correct!"
+            score++ // Add 1 to score
+             } else {
+                // wrong answer
+                 feedbackText.text = "Incorrect"
+
+             }
+        }
+         // what will happen when user clicks "False"
+         falseButton.setOnClickListener {
+            if (answer[currentIndex] == "False") {
+                feedbackText.text = "Correct!"
+                score++
+                } else {
+                     feedbackText.text = "Incorrect"
+                }
+            }
+
+          // Move to te next question when "Next" is clicked
+          nextButton.setOnClicksListener {
+              currentIndex++ // Move to the next index in the array
+
+              if (currentIndex < questions.size) {
+               /// if there are more questions, display the next one
+                questionText.text = questions[currentIndex]
+                 feedbackText.text = ** // Clear feedback for next question
+                 } else {
+                    // All questions are done - please go to the Screen Score
+                    val intemt = Intent(packageContext: this,MainActivity3::class.java)
+                    // Pass the final score to the next screen
+                    intent.putExtra(name:"score",score)
+                    // Pass arrays to the next screen
+
+                    intent.putExtra(name"questions", questions"
+                    intent.putExtra9name:"answers", answers
+                    startActivity(intent)
+                    finish()// Close this screen
+
+          }       }
+         }
+
+    }

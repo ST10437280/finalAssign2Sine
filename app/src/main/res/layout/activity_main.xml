@@ -1,0 +1,31 @@
+package vcmsa.ci.sineassign2
+
+import android.annotation.SuppressLint
+import android.os.Bundle
+import android.widget.Button
+import androidx.appcompat.app.AppCcompatActivity
+import package vcmsa.ci.sineassign2.R.id.startButton
+
+class MainActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        // Set layout for this screen
+        setContentView(R.layout.activity_main)
+
+        //Get the Start button usinhg its ID
+        val startButton =
+            findViewById
+<Button xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/sineFflashCrds">(R.id.startButton)
+
+    //Set what happens when the Start button is clicked
+    startButton.setOnClickListener {
+    // Create a new screen (Intent) to move to the QuizActivity
+    val intent = Intent ( packageContext: this, MainActivity2:: class.java)
+    //Start the QuizActivity screen
+    startActivity(intent)
+
+    }
+
+    }
+    }

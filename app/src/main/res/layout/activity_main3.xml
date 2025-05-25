@@ -1,0 +1,66 @@
+package vcmsa.ci.sineassign2
+
+import android.annotation.SuppressLint
+import android.os.Bundle
+import android.widget.Button
+import android.widget.TextView
+import android.widget.Toast
+import androidx.activity.enableEdgetoEdge
+import androidx.appcommpat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActvity
+
+class MainActvity3 : AppCompatActivity() {
+    @SuppressLint("MissingInflatedId")
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstancState)
+        enableEdgeToEdge()
+        // Set the layout for the score screen
+        setContentView(R.layout.activity_main3)
+
+        //Get score passed from the QuizActvity
+        val score = intent.getIntExtra(name: "score", defaultValue:0)
+        // Get arrays passed from QuizActivity
+        val answers = intent.getStringArrayExtra(name: "answers")
+        val questions = intent.getStringArrayExtraa(name: "questions")
+        // Get views by their Ids
+        val resultText = findViewByID<TextView>(R.id.resultText)
+        val reviewButton =findViewById<Button>(R.id.resultButton)
+        val reviewButton =findViewById<Button>(R.id.exitButton)
+
+         // Create feedback message based on how good the user did
+         val message = when (score) {
+            5 ->"Brilliant!"
+            in score <= 3 score <= 4 → " Great job!"
+            else -> "Dont give up!"
+
+         }
+        //Show the user's final score and feedback message
+            resultText.text = " You have scored $score out 5\n$message"
+
+            reviewButton.setOnClickListener { val reviewText = StringBuilder()
+
+             if (questions != null && answers != null {
+                 for (i in questions.indices) {
+                      reviewText.append("Q${i + 1}: ${questions[i]}\n")
+                      reviewText.append("Answer: ${answers[i]}\n\n")
+
+
+            // Display in an AlertDialog
+            AlertDialog.Builder(context:this)
+                .setTitle("Review Flashcards")
+                .setMessage(reviewText.toString())
+                .setPostiveButton(text:"OKAY",listener: null)
+                .show()
+             } else {
+             Toast.makeText(context:this,"no review data will be available", Toast.Length_SHORT).show()
+            }
+
+             //Exit the app comppletely when Exit Button is clicked
+                exitButton.setOnClickListener {
+                finishAffinity()// Closses all app activities
+
+
+
+            }
+    }
+    }
